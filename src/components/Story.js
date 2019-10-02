@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { getStory } from '../services/HackerNews'
+import { getStory } from '../services/HackerNews';
+import { StoryWrapper, StoryTitle, StoryMeta, StoryMetaElement } from '../styles/StoryStyles';
 
 export const Story  = ({ storyID }) => {
 
@@ -9,10 +10,28 @@ export const Story  = ({ storyID }) => {
     }, []);
 
     return story && story.url ? (
-        <>
-            <a href={story.url}><p>{story.title}</p></a>
-            By: <p>{story.by}</p>
-            Posted: <p>{story.time}</p>
-        </>
+        <StoryWrapper data-testid="story">
+            <StoryTitle>
+                <a href={story.url}>{story.title}</a>
+            </StoryTitle>
+
+            <StoryMeta>
+                <span data_testid="story-by">
+                    <StoryMetaElement color="#000">
+                        By:
+                    </StoryMetaElement>
+                    {story.by}
+                </span>
+                &nbsp;&nbsp;
+
+                <span data_testid="story-time">
+                    <StoryMetaElement color="#000">
+                        Posted:
+                    </StoryMetaElement>
+                    {story.time}
+                </span>
+            </StoryMeta>
+            
+        </StoryWrapper>
     ) : null
 }
