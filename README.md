@@ -1,3 +1,57 @@
+<b>Quick guide from writing React Class Components to Functional Components with Hooks </b>
+<br/>
+1. Initializing and creating state conditions
+<pre>
+let [effectedItem, setItemEffect] = useState(initial_state)
+let [count, setCount] = useState(0)
+</pre>
+<br/>
+Your setState({}) function thus becomes "custom" with Hooks. Rather than say this.setState({count: count+1}) you do setCount(count+1). You call this "custom" setState function to produce the "effect" that causes lifecycle and state changes.
+
+<br/>
+2. Updating state and managing lifecycles <br/>
+When you call this.setState({}) for a process, you have created a "React side effect" or "effect".<br/>
+The general hook you use when change state and cause this effect is useEffect(()=>{}, [variable to watch]).
+<br/>
+This hook also combines multiple life cycles so it will behave like componentDidMount() and didUpdate() by running once initially and after updates.
+<br/>
+Example (custom hook):
+<pre>
+
+let useInfiniteScroll = () => {
+let MAX_POSTS = 500;
+let POST_INCREMENT = 25; 
+
+let [loading, setLoading] = useState(false)
+let [count, setCount] = useState(POST_INCREMENT
+
+let handleScroll = () => {
+  setLoading(true) //triggers setLoading to true
+}
+
+
+//useEffect(func, [loading]) loading is being watched, when true: run
+useEffect(()=>{ 
+  if(!loading) return; //do nothing on componentMount
+  if(count+POST_INCREMENT > MAX_POSTS)
+    setCount(MAX_POSTS)
+  else
+    setCount(count+POST_INCREMENT)
+   
+  setLoading(false) //finish effect until handleScroll is activated again
+}, [loading])
+
+useEffect(()=>{
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll)
+})
+
+}
+</pre>
+
+
+
+
 
 <b>Lessons learned</b>
 <br/>
