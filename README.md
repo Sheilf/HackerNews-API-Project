@@ -8,7 +8,9 @@ let [count, setCount] = useState(0)
 <br/>
 Your setState({}) function thus becomes "custom" with Hooks. Rather than say this.setState({count: count+1}) you do setCount(count+1). You call this "custom" setState function to produce the "effect" that causes lifecycle and state changes.
 
-<br/>
+<br/><br/>
+
+
 2. Updating state and managing lifecycles <br/>
 When you call this.setState({}) for a process, you have created a "React side effect" or "effect".<br/>
 The general hook you use when change state and cause this effect is useEffect(()=>{}, [variable to watch]).
@@ -16,6 +18,8 @@ The general hook you use when change state and cause this effect is useEffect(()
 This hook also combines multiple life cycles so it will behave like componentDidMount() and didUpdate() by running once initially and after updates.
 <br/>
 Example (custom hook):
+
+
 <pre>
 
 let useInfiniteScroll = () => {
@@ -23,12 +27,35 @@ let MAX_POSTS = 500;
 let POST_INCREMENT = 25; 
 
 let [loading, setLoading] = useState(false)
-let [count, setCount] = useState(POST_INCREMENT
+let [count, setCount] = useState(POST_INCREMENT)
+/*
+Back in the day the useState(init) values used to be
+let OldSchool = React.createClass({
+  getInitialState: f(){}
+  componentDidMount: f(){}
+  render: f(){return()}
+
+or (a class/functional component)
+
+class Current extends Component{
+  constructor(){
+    super()
+    this.state={}
+  }
+  
+  componentDidMount()
+
+  render()
+}
+
+class
+*/
 
 let handleScroll = () => {
   setLoading(true) //triggers setLoading to true
 }
 
+*/
 
 //useEffect(func, [loading]) loading is being watched, when true: run
 useEffect(()=>{ 
